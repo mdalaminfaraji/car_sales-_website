@@ -22,7 +22,7 @@ class Car(models.Model):
 class Comment(models.Model):
     car = models.ForeignKey(Car, on_delete=models.CASCADE, related_name='comments')
     name=models.CharField(max_length=30)
-    comment_text = models.TextField()
+    comment = models.TextField()
     created_on=models.DateTimeField(auto_now_add=True)
     def __str__(self):
         return f"Comments by {self.name}"

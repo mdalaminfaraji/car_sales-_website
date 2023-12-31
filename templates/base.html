@@ -15,8 +15,8 @@
 
     <title>car|| sales|| website</title>
   </head>
-  <body style="background-color:"ffefd5"" >
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <body style="background-color: #ffefd5">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'homepage' %}">Car Logo</a>
         <button
@@ -43,8 +43,7 @@
 
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'add_brand' %}"
-                >Add Car Brand</a>
+              <a class="nav-link" href="{% url 'add_brand' %}">Add Car Brand</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="{% url 'add_car' %}">Add Car</a>
