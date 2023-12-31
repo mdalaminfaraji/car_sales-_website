@@ -35,7 +35,7 @@ def delete_car(request, id):
         return redirect('homepage')
 
 
-
+@login_required
 def add_brand(request):
     if request.method == 'POST': 
         brand_form = forms.BrandForm(request.POST) 
@@ -70,3 +70,16 @@ class DetailCarView(DetailView):
         context['comments'] = comments
         context['comment_form'] = comment_form
         return context
+
+
+
+@login_required
+def create_order(request, id):
+        car=models.Car.objects.get(pk=id)
+        if request.method=='POST':
+                if car.quantity>0:
+                        car.quantity-=1
+                        car.save()
+                        models.Order.objects.create(user=request.user, car=car)
+                        return redirect('profile')
+        return redirect('login')

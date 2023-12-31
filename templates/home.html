@@ -2,7 +2,7 @@
 
 <div class="d-flex flex-warp col-12">
   <div class="col-6">
-    <h1>Our blog page</h1>
+    <h1>Our Car page</h1>
     <p>
       Lorem ipsum dolor sit, amet consectetur adipisicing elit. Adipisci sint,
       ducimus nam magni saepe earum numquam deleniti quod, aperiam sunt ex
@@ -12,6 +12,56 @@
   <div class="col-6">
     <img src="{% static 'car_banner.jpg' %}" class="img-fluid" />
   </div>
+</div>
+
+<div class="p-3 text-center mt-5">
+  <div>
+    {% for brand in brands %}
+
+    <a
+      href="{% url 'brand_wise_car' brand.slug %}"
+      class="text-decoration-none btn btn-secondary mx-2"
+      >{{brand.name}}</a
+    >
+
+    {% endfor %}
+  </div>
+</div>
+<h4 class="mt-4 ps-5">Total Car Found: {{data | length}}</h4>
+
+<div class="d-flex flex-wrap justify-content-center mx-5">
+  {% for car in data %}
+  <div class="col-sm-3">
+    <div class="card m-2">
+      <img src="{{car.image.url}}" class="card-img-top img-fluid" alt="..." />
+      <div class="card-body">
+        <h5 class="card-title">
+          <a
+            href="{% url 'detail_car' car.id %}"
+            class="text-decoration-none text-dark"
+            >{{car.name}}</a
+          >
+        </h5>
+
+        <p>Brand Name :{{car.brand}}</p>
+        <p>Price : {{car.price}}</p>
+
+        <a
+          href="{% url 'detail_car' car.id %}"
+          class="text-decoration-none btn btn-secondary"
+          >View Details</a
+        >
+
+        {% comment %}
+        <a href="{% url 'edit_post' post.id %}" class="btn btn-warning">Edit</a>
+        <a href="{% url 'delete_post' post.id %}" class="btn btn-warning"
+          >Delete</a
+        >
+        {% endcomment %}
+      </div>
+    </div>
+  </div>
+  {% endfor %}
 </div>
 
 {% endblock %}

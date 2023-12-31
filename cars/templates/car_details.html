@@ -1,16 +1,26 @@
 {% extends "base.html" %} {% block content %} {% load crispy_forms_tags %}
 
-<div class="col-12">
-  <div class="card m-2">
-    <img src="{{car.image.url}}" class="card-img-top img-fluid" alt="..." />
-    <div class="card-body">
-      <h5 class="card-title">Car Name :{{car.name}}</h5>
-      <p class="card-text">Brand :{{car.brand}}</p>
-      <p class="card-text">Quantity :{{car.quantity}}</p>
-      <p class="card-text">Price :{{car.price}}</p>
-      <p class="card-text">Description{{car.description}}</p>
-      <button class="btn btn-success">Buy Now</button>
-    </div>
+<div class="col-12 d-flex">
+  <div class="card m-2 col-6">
+    <img
+      src="{{car.image.url}}"
+      class="card-img-top img-fluid"
+      alt="Car image"
+      style="height: 650px"
+    />
+  </div>
+  <div class="card-body m-5 col-6">
+    <h5 class="card-title">Car Name :{{car.name}}</h5>
+    <p class="card-text">Brand :{{car.brand}}</p>
+    <p class="card-text">Quantity :{{car.quantity}}</p>
+    <p class="card-text">Price :{{car.price}}</p>
+    <p class="card-text">Description{{car.description}}</p>
+    {% if request.user.is_authenticated %}
+    <form method="post" action="{% url 'order' car.id %}">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-success">Buy Now</button>
+    </form>
+    {% endif %}
   </div>
 </div>
 
