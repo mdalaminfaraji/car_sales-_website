@@ -20,5 +20,6 @@ from .import views
 urlpatterns = [
     path('', views.home, name="homepage"),
     path('admin/', admin.site.urls),
-    path('user/', include('users.urls'))
+    path('user/', include('users.urls')),
+    path('car/', include('cars.urls'))
 ]

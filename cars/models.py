@@ -4,6 +4,8 @@ from django.contrib.auth.models import User
 class Brand(models.Model):
     name = models.CharField(max_length=100)
     slug=models.SlugField(max_length=100, unique=True, null=True,blank=True)
+    def __str__(self):
+            return self.name
 
 class Car(models.Model):
     brand = models.ForeignKey(Brand, on_delete=models.CASCADE)
@@ -11,7 +13,7 @@ class Car(models.Model):
     description = models.TextField()
     quantity = models.PositiveIntegerField()
     price = models.DecimalField(max_digits=10, decimal_places=2)
-    image = models.ImageField(upload_to='cars/media/car_images')
+    image = models.ImageField(upload_to='cars/media/uploads' ,blank=True, null=True)
     
     def __str__(self):
             return self.name

@@ -43,12 +43,11 @@
 
             {% if request.user.is_authenticated %}
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'homepage' %}"
-                >Add Category</a
-              >
+              <a class="nav-link" href="{% url 'add_brand' %}"
+                >Add Car Brand</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{% url 'homepage' %}">Add Post</a>
+              <a class="nav-link" href="{% url 'add_car' %}">Add Car</a>
             </li>
             {% endif %}
           </ul>

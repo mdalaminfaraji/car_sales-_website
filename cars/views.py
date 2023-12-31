@@ -6,6 +6,7 @@ from django.utils.decorators import method_decorator
 # Create your views here.
 from django.views.generic import CreateView,UpdateView,DeleteView, DetailView
 from django.urls import reverse_lazy
+from django.contrib import messages
 
 @method_decorator(login_required, name="dispatch")
 class AddCarCreateView(CreateView):
@@ -15,6 +16,7 @@ class AddCarCreateView(CreateView):
     success_url=reverse_lazy('add_car')
     def form_valid(self, form) :
         form.instance.author = self.request.user
+        messages.success(self.request, 'Add car successful')
         return super().form_valid(form)
 
 
@@ -42,7 +44,7 @@ def add_brand(request):
             return redirect('add_brand') 
     
     else: 
-        brand_form = forms.brandForm()
+        brand_form = forms.BrandForm()
     return render(request, 'add_brand.html', {'form' : brand_form})
 
 
