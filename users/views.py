@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth import authenticate, login, update_session_auth_hash, logout
 from django.contrib.auth.decorators import login_required
-
+from cars.models import Order
 def register(request):
     if request.method=="POST":
         register_form=forms.SignUpForm(request.POST)
@@ -43,7 +43,11 @@ def user_logout(request):
 
 @login_required
 def profile(request):
-    return render(request, 'profile.html', {"data":request.user})
+        user=request.user
+        orders=Order.objects.filter(user=user)
+        for car in orders:
+                print(car)
+        return render(request, 'profile.html', {"data":request.user, "orders":orders})
 
 @login_required
 def edit_profile(request):
@@ -56,4 +60,6 @@ def edit_profile(request):
     else:
         profile_form = forms.ChangeUserData( instance=request.user)
     return render(request, 'update_profile.html', {'form':profile_form, 'type':'Profile', "user":request.user})
+
+
 

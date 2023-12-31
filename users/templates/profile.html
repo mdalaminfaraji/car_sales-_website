@@ -4,4 +4,38 @@
 
 <a href="{% url 'edit_profile' %}" class="btn btn-success"> Edit Profile</a>
 
-{% endblock %}
+<h2>Order History</h2>
+
+{% if orders %}
+<div class="d-flex flex-wrap justify-content-center mx-5">
+  {% for order in orders %}
+  <div class="col-sm-3">
+    <div class="card m-2">
+      <img
+        src="{{order.car.image.url}}"
+        class="card-img-top img-fluid"
+        alt="..."
+      />
+      <div class="card-body">
+        <h5 class="card-title">
+          <a
+            href="{% url 'detail_car' order.id %}"
+            class="text-decoration-none text-dark"
+            >{{order.car.name}}</a
+          >
+        </h5>
+
+        <p>Brand Name :{{order.car.brand}}</p>
+        <p>Price : {{order.car.price}}</p>
+
+        <a
+          href="{% url 'detail_car' order.id %}"
+          class="text-decoration-none btn btn-secondary"
+          >View Details</a
+        >
+      </div>
+    </div>
+  </div>
+  {% endfor %}
+</div>
+{% endif %} {% endblock %}
